@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}"></link>
+<div class="container emp-profile">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <form method = 'POST' action="#" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Hi {{ request.user.first_name }}, Please select your category</h1><br>
+        {{ form|crispy }}
+        <br/>
+        <input type='submit' value='Continue' class="btn btn-primary"/>
+        <br>
+        <br>
+        <br>
+        <br>
+      </form>
+    </div>
+    <div class="col-2" ></div>
+  </div>
+</div>
+{% endblock content %}

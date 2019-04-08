@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load bootstrap4 %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Signup" %}BS{% endblock %}
+{% block content %}
+  <img src="{% static 'images/homepage_logo.png' %}" class="img-thumbnail mx-auto d-block" alt="vce"/>
+  <br><br>
+  <h1 class="text-center">VASAVI HEALTH CARE DISPENSARY</h1>
+  <br><br>
+  <form action="{% url 'google_login' %}">
+    {% csrf_token %}
+    <input type="image" src="{% static 'images/google_button.png' %}" class="img-thumbnail mx-auto d-block" alt="Google"/>
+  </form>
+{% endblock content %}

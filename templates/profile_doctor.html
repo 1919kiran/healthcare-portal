@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account socialaccount %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}"></link>
+<div class="container emp-profile">
+	<form method="post">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="profile-img">
+          <img alt="" src="{{ doctor_account.user_social.extra_data.picture }}" style="width: 256px; height: 256px">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="profile-head">
+					<h5>Dr. {{ doctor_account.user_social.extra_data.name }}, {{ doctor_account.qualification }}</h5><br>
+					<h6>Designation: {{ doctor_account.designation }}</h6>
+					<br><br><br>
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Other Details</a>
+						</li>
+						{% if doctor_account.is_approved_by_admin %}
+							<li class="nav-item">
+								<a class="nav-link" id="patient-tab" data-toggle="tab" href="#patient" role="tab" aria-controls="patient" aria-selected="false">Patient Details</a>
+							</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+			{% if doctor_account.is_approved_by_admin %}
+				<div class="col-md-2">
+					<!-- <button class="profile-edit-btn" name="btnAddMore" value="Diagonise" href="{% url 'userprofile:diagnose_patient' %}"/> -->
+					<a href="{% url 'userprofile:select_patient' %}">Diagnose</a>
+				</div>
+			{% endif %}
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<!-- <div class="profile-work">
+					<p>WORK LINK</p>
+					<a href="{{ social_account.extra_data.link }}">Website Link</a>
+					<br/>
+					<a href="">Bootsnipp Profile</a>
+					<br/>
+					<a href="">Bootply Profile</a>
+					<p>SKILLS</p>
+					<a href="">Web Designer</a>
+					<br/>
+					<a href="">Web Developer</a>
+					<br/>
+					<a href="">WordPress</a>
+					<br/>
+					<a href="">WooCommerce</a>
+					<br/>
+					<a href="">PHP, .Net</a>
+					<br/>
+				</div> -->
+			</div>
+			<div class="col-md-8">
+				<div class="tab-content profile-tab" id="myTabContent">
+					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<div class="row">
+							<div class="col-md-6">
+								<label>User Id</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Name</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account.user_social.extra_data.name }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Email</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account.email }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Phone</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account.phone }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Gender</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account.gender }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Address</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account.address }}</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+						<div class="row">
+							<div class="col-md-6">
+								<label>Last Login</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account.user.last_login }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Date joined</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account.user.date_joined }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Registration number</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account.registration_number }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Qualification</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account.qualification }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Designation</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ doctor_account.designation }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Approval Status</label>
+							</div>
+							<div class="col-md-6">
+								{% if doctor_account.is_approved_by_admin  %}
+									<p>Approved</p>
+								{% else %}
+									<p>Not Approved</p>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+
+					{% if doctor_account.is_approved_by_admin  %}
+						<div class="tab-pane fade" id="patient" role="tabpanel" aria-labelledby="patient-tab">
+							<div class="row">
+								<div class="col-md-6">
+									<p>Patients Diagnosed by you:</p>
+								</div>
+								<div class="col-md-6">
+									{{ patients_diagnosed }}
+									{% for patient in patients_diagnosed %}
+										<p>{{ patient }}</p>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock content %}
