@@ -9,56 +9,33 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="profile-img">
-          <img alt="" src="{{ user_account.extra_data.picture }}" style="width: 256px; height: 256px">
-
-					<div class="file btn btn-lg btn-primary">
-                                Change Photo
-						<input type="file" name="file"/>
-					</div>
+          <img alt="" src="{{ patient_account.user_social.extra_data.picture }}" style="width: 256px; height: 256px">
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="profile-head">
-					<h5>{{ patient_account.user }}</h5>
+					<h5>{{ patient_account.user_social.extra_data.name }}</h5><br>
 					<h6>Student</h6>
-					<p class="proile-rating">DESCRIPTION :
-						<span>8/10</span>
+					<p class="proile-rating">
+						<span></span>
 					</p>
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item">
 							<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+							<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Health Details</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-md-2">
-				<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+				<a href="{% url 'userprofile:view_profile_patient' %}" class="profile-edit-btn" name="btnAddMore" value="View Profile">View Profile</a>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<div class="profile-work">
-					<p>WORK LINK</p>
-					<a href="{{ user_account.extra_data.link }}">Website Link</a>
-					<br/>
-					<a href="">Bootsnipp Profile</a>
-					<br/>
-					<a href="">Bootply Profile</a>
-					<p>SKILLS</p>
-					<a href="">Web Designer</a>
-					<br/>
-					<a href="">Web Developer</a>
-					<br/>
-					<a href="">WordPress</a>
-					<br/>
-					<a href="">WooCommerce</a>
-					<br/>
-					<a href="">PHP, .Net</a>
-					<br/>
-				</div>
+
 			</div>
 			<div class="col-md-8">
 				<div class="tab-content profile-tab" id="myTabContent">
@@ -76,7 +53,7 @@
 								<label>Name</label>
 							</div>
 							<div class="col-md-6">
-								<p>{{ social_account.extra_data.name }}</p>
+								<p>{{ patient_account.user_social.extra_data.name }}</p>
 							</div>
 						</div>
 						<div class="row">
@@ -103,53 +80,86 @@
 								<p>{{ patient_account.gender }}</p>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Address</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ patient_account.address }}</p>
+							</div>
+						</div>
 					</div>
 					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 						<div class="row">
 							<div class="col-md-6">
-								<label>Last Login</label>
+								<label>Height</label>
 							</div>
 							<div class="col-md-6">
-								<p>{{Expert}}</p>
+								<p>{{ patient_account.height }}</p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
-								<label>Hourly Rate</label>
+								<label>Weight</label>
 							</div>
 							<div class="col-md-6">
-								<p>10$/hr</p>
+								<p>{{ patient_account.weight }}</p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
-								<label>Total Projects</label>
+								<label>Reason</label>
 							</div>
 							<div class="col-md-6">
-								<p>230</p>
+								<p>{{ patient_account.reason }}</p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
-								<label>English Level</label>
+								<label>Illnesses</label>
 							</div>
 							<div class="col-md-6">
-								<p>Expert</p>
+								<p>{{ patient_account.illnesses }}</p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
-								<label>Availability</label>
+								<label>Other Illnesses</label>
 							</div>
 							<div class="col-md-6">
-								<p>6 months</p>
+								<p>{{ patient_account.other_illnesses }}</p>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-12">
-								<label>Your Bio</label>
-								<br/>
-								<p>Your detail description</p>
+							<div class="col-md-6">
+								<label>Prescribed Tablets</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ patient_account.prescribed_tablets }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Drug allergies</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ patient_account.drug_allergies }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Operations</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ patient_account.operations }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label>Other Illnesses</label>
+							</div>
+							<div class="col-md-6">
+								<p>{{ patient_account.other_illnesses }}</p>
 							</div>
 						</div>
 					</div>

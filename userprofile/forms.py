@@ -34,7 +34,6 @@ class SignupOptionForm(forms.Form):
     CHOICES = (
         ('Doctor', 'Doctor'),
         ('Patient', 'Patient'),
-        ('Pharmacist', 'Pharmacist'),
     )
     category = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
 

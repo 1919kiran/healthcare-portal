@@ -10,7 +10,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{% block title %}VCE Healthcare{% endblock %}</title>
+  <title>{% block title %}PHR Managment System{% endblock %}</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -29,7 +29,7 @@
 
   {% block nav %}
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">VCE Health Care(Dispensary)</a>
+    <a class="navbar-brand" href="#">Personal Healthcare Management System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -39,7 +39,7 @@
           <a class="nav-link" href="{% url 'userprofile:profile' %}">Home<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active px-4">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="{% url 'userprofile:about' %}">About</a>
         </li>
         <li class="nav-item dropdown active px-4">
           {% if request.user.is_authenticated %}
@@ -48,7 +48,6 @@
             </a>
           {% endif %}
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="{% url 'userprofile:diagnose_patient' %}">Settings</a>
             <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
           </div>
         </li>

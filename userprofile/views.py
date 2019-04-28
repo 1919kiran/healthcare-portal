@@ -11,6 +11,8 @@ from userprofile.models import DoctorModel, PatientModel
 def index(request):
     return render(request, 'index.html', None)
 
+def about(request):
+    return render(request, 'about.html', None)
 
 def signup_option(request):
     #signup as patient, doctor or pharmacist
@@ -47,7 +49,7 @@ def signup(request):
             if category == 'Patient':
                 patient = form.save(commit=False)
                 patient.user = request.user
-                patient.user_social = social_accounts.get(email=request.user.email)
+                patient.user_social = social_accounts.get(user=request.user)
                 patient.save()
                 return redirect('userprofile:profile')
             elif category == 'Doctor':
@@ -94,10 +96,9 @@ def profile(request):
 
         elif is_doctor:
             patients_diagnosed = patient_accounts.filter(diagnosed_by=doctor_account)
+            print(patients_diagnosed)
 
-            for i in patients_diagnosed:
-                print(i.user_social.extra_data)
-            return render(request, 'profile_doctor.html', {'doctor_account': doctor_account}, {'patients_diagnosed': patients_diagnosed})
+            return render(request, 'profile_doctor.html', {'doctor_account': doctor_account, 'patients_diagnosed': patients_diagnosed})
 
     return render(request, 'profile.html', None)
 
@@ -138,3 +139,16 @@ def diagnose_patient(request):
         print(form.errors)
         form = PatientDiagnoseForm(instance=patient)
     return render(request, 'edit_patient_details.html', {'form': form})
+
+
+def view_profile_patient(request):
+    #views the patient form
+    patient = get_object_or_404(PatientModel, email=request.user.email)
+    form = PatientForm(instance=patient)
+    return render(request, 'view_profile.html', {'form': form})
+
+def view_profile_doctor(request):
+    #views the patient form
+    doctor = get_object_or_404(Doctor, email=request.user.email)
+    form = DoctorForm(instance=doctor)
+    return render(request, 'view_profile.html', {'form': form})

@@ -170,15 +170,16 @@
 					</div>
 
 					{% if doctor_account.is_approved_by_admin  %}
+
 						<div class="tab-pane fade" id="patient" role="tabpanel" aria-labelledby="patient-tab">
 							<div class="row">
 								<div class="col-md-6">
-									<p>Patients Diagnosed by you:</p>
+									<p>Patients Diagnosed :</p>
 								</div>
 								<div class="col-md-6">
-									{{ patients_diagnosed }}
+									{{ patients_diagnosed.user }}
 									{% for patient in patients_diagnosed %}
-										<p>{{ patient }}</p>
+										<p><img src="{{ patient.user_social.extra_data.picture }}" class="rounded-circle" alt="Profile Picture" width="50" height="50"> {{ patient.user_social.extra_data.name }}</p>
 									{% endfor %}
 								</div>
 							</div>
